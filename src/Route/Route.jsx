@@ -7,6 +7,11 @@ import LogIn from "../Components/LogIn";
 import About from "../Pages/About";
 import Profile from "../Pages/Profile";
 import PrivateRoute from "../Components/Context/PrivateRouter";
+import CourseDetails from "../Pages/CourseDetails";
+import AddCourses from "../Pages/AddCourses";
+import ManageCourses from "../Pages/ManageCourses";
+import EditCourse from "../Pages/EditCourse";
+import MyEnrolledCourses from "../Pages/MyEnrolledCourses";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +46,49 @@ const router = createBrowserRouter([
             <Profile />
           </PrivateRoute>
         ),
-      }
+      },
+      {
+        path: "/courses/:id",
+        Component: CourseDetails,
+      },
+      {
+        path: "/add-course",
+        element: (
+          <PrivateRoute>
+            <AddCourses />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/manage-courses",
+        element: (
+          <PrivateRoute>
+            <ManageCourses />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/edit-course/:id",
+        element: (
+          <PrivateRoute>
+            <EditCourse />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-enrolled",
+        element: (
+          <PrivateRoute>
+            <MyEnrolledCourses />
+          </PrivateRoute>
+        ),
+      },
+
+      // Catch all unknown routes
+      {
+        path: "*",
+        Component: ErrorPage,
+      },
     ],
   },
 ]);
