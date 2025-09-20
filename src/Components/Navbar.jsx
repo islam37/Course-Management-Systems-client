@@ -47,13 +47,11 @@ const Navbar = () => {
             <Link to="/" className="hover:text-indigo-300 transition">
               Home
             </Link>
-
             {!user && (
               <Link to="/jobs" className="hover:text-indigo-300 transition">
                 Jobs
               </Link>
             )}
-
             {user && (
               <>
                 <Link to="/courses" className="hover:text-indigo-300 transition">
@@ -94,12 +92,14 @@ const Navbar = () => {
               </>
             ) : (
               <div className="flex items-center space-x-4">
-                <img
-                  src={user.photoURL || "https://i.pravatar.cc/40"}
-                  alt="profile"
-                  className="h-9 w-9 rounded-full border-2 border-indigo-400"
-                />
-                <span>{user.name || "User"}</span>
+                <Link to="/profile" className="flex items-center space-x-2">
+                  <img
+                    src={user.photoURL || "https://i.pravatar.cc/40"}
+                    alt="profile"
+                    className="h-9 w-9 rounded-full border-2 border-indigo-400"
+                  />
+                  <span>{user.displayName || "User"}</span>
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="px-3 py-1 rounded-md bg-red-600 hover:bg-red-700 text-white text-sm transition"
@@ -184,6 +184,14 @@ const Navbar = () => {
               </Link>
             </>
           ) : (
+            <Link
+              to="/profile"
+              className="block hover:text-indigo-300 mt-2"
+            >
+              Profile
+            </Link>
+          )}
+          {user && (
             <button
               onClick={handleLogout}
               className="block w-full text-left mt-2 px-3 py-2 rounded-md bg-red-600 hover:bg-red-700 text-white"

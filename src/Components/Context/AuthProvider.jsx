@@ -73,14 +73,15 @@ export default function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
-  const value = {
-    user,
-    signup,
-    login,
-    loginWithGoogle,
-    logout,
-    updateUserProfile
-  };
+ const value = {
+  user,
+  loading,  
+  signup,
+  login,
+  loginWithGoogle,
+  logout,
+  updateUserProfile,
+};
 
   return (
     <AuthContext.Provider value={value}>
