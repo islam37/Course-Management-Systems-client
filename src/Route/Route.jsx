@@ -12,6 +12,7 @@ import AddCourses from "../Pages/AddCourses";
 import ManageCourses from "../Pages/ManageCourses";
 import EditCourse from "../Pages/EditCourse";
 import MyEnrolledCourses from "../Pages/MyEnrolledCourses";
+import Courses from "../Pages/Courses";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,9 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {path: "/courses",
+        Component: Courses,
       },
       {
         path: "/signup",

@@ -5,6 +5,7 @@ import { AuthContext } from "./context/AuthContext";
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -47,27 +48,22 @@ const Navbar = () => {
             <Link to="/" className="hover:text-indigo-300 transition">
               Home
             </Link>
-            {!user && (
-              <Link to="/jobs" className="hover:text-indigo-300 transition">
-                Jobs
-              </Link>
-            )}
+            <Link to="/about" className="hover:text-indigo-300 transition">
+              About
+            </Link>
             {user && (
               <>
                 <Link to="/courses" className="hover:text-indigo-300 transition">
                   Courses
                 </Link>
-                <Link
-                  to="/add-course"
-                  className="hover:text-indigo-300 transition"
-                >
+                <Link to="/add-course" className="hover:text-indigo-300 transition">
                   Add Course
                 </Link>
-                <Link
-                  to="/dashboard"
-                  className="hover:text-indigo-300 transition"
-                >
-                  Dashboard
+                <Link to="/manage-courses" className="hover:text-indigo-300 transition">
+                  Manage Courses
+                </Link>
+                <Link to="/my-enrolled" className="hover:text-indigo-300 transition">
+                  My Enrolled
                 </Link>
               </>
             )}
@@ -92,14 +88,31 @@ const Navbar = () => {
               </>
             ) : (
               <div className="flex items-center space-x-4">
-                <Link to="/profile" className="flex items-center space-x-2">
-                  <img
-                    src={user.photoURL || "https://i.pravatar.cc/40"}
-                    alt="profile"
-                    className="h-9 w-9 rounded-full border-2 border-indigo-400"
-                  />
-                  <span>{user.displayName || "User"}</span>
-                </Link>
+                {/* Profile Dropdown */}
+                <div className="relative">
+                  <button
+                    onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                    className="flex items-center space-x-2 focus:outline-none"
+                  >
+                    <img
+                      src={user.photoURL || "https://i.pravatar.cc/40"}
+                      alt="profile"
+                      className="h-9 w-9 rounded-full border-2 border-indigo-400"
+                    />
+                  </button>
+                  {isProfileMenuOpen && (
+                    <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded-md shadow-lg py-2 z-20">
+                      <Link
+                        to="/profile"
+                        className="block px-4 py-2 hover:bg-indigo-100"
+                      >
+                        Profile
+                      </Link>
+                    </div>
+                  )}
+                </div>
+
+                {/* Logout Button */}
                 <button
                   onClick={handleLogout}
                   className="px-3 py-1 rounded-md bg-red-600 hover:bg-red-700 text-white text-sm transition"
@@ -156,11 +169,9 @@ const Navbar = () => {
           <Link to="/" className="block hover:text-indigo-300">
             Home
           </Link>
-          {!user && (
-            <Link to="/jobs" className="block hover:text-indigo-300">
-              Jobs
-            </Link>
-          )}
+          <Link to="/about" className="block hover:text-indigo-300">
+            About
+          </Link>
           {user && (
             <>
               <Link to="/courses" className="block hover:text-indigo-300">
@@ -169,12 +180,24 @@ const Navbar = () => {
               <Link to="/add-course" className="block hover:text-indigo-300">
                 Add Course
               </Link>
-              <Link to="/dashboard" className="block hover:text-indigo-300">
-                Dashboard
+              <Link to="/manage-courses" className="block hover:text-indigo-300">
+                Manage Courses
               </Link>
+              <Link to="/my-enrolled" className="block hover:text-indigo-300">
+                My Enrolled
+              </Link>
+              <Link to="/profile" className="block hover:text-indigo-300 mt-2">
+                Profile
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="block w-full text-left mt-2 px-3 py-2 rounded-md bg-red-600 hover:bg-red-700 text-white"
+              >
+                Logout
+              </button>
             </>
           )}
-          {!user ? (
+          {!user && (
             <>
               <Link to="/login" className="block hover:text-indigo-300">
                 Login
@@ -183,21 +206,6 @@ const Navbar = () => {
                 Register
               </Link>
             </>
-          ) : (
-            <Link
-              to="/profile"
-              className="block hover:text-indigo-300 mt-2"
-            >
-              Profile
-            </Link>
-          )}
-          {user && (
-            <button
-              onClick={handleLogout}
-              className="block w-full text-left mt-2 px-3 py-2 rounded-md bg-red-600 hover:bg-red-700 text-white"
-            >
-              Logout
-            </button>
           )}
         </div>
       )}
