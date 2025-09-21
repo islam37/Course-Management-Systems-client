@@ -62,20 +62,20 @@ const Courses = () => {
               onError={(e) => (e.target.src = "/fallback-image.jpg")}
             />
             <div className="p-4 flex flex-col flex-1">
-              <h3 className="text-lg font-semibold">{course.title}</h3>
+              <h3 className="text-lg font-semibold text-black font-bold">{course.title}</h3>
               <p className="text-gray-500 text-sm">
                 Created on: {new Date(course.createdAt).toLocaleDateString()}
               </p>
               <p className="mt-2 text-gray-700 flex-1">{course.shortDescription}</p>
               {course.duration && (
-                <p className="mt-2 font-medium">Duration: {course.duration}</p>
+                <p className="mt-2 font-medium text-red-400">Duration: {course.duration}</p>
               )}
               {course.creatorName && (
                 <p className="mt-1 text-gray-600 text-sm">By: {course.creatorName}</p>
               )}
               <Link
                 to={`/courses/${course._id}`}
-                className="mt-4 inline-block px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-semibold text-center"
+                className="mt-4 inline-block px-4 py-2 bg-indigo-600 text-black font-bold rounded-lg hover:bg-indigo-700 font-semibold text-center"
                 aria-label={`View details of ${course.title}`}
               >
                 Details

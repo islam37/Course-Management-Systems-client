@@ -38,7 +38,7 @@ const PopularCourses = () => {
         {courses.map((course) => (
           <div
             key={course._id}
-            className="bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
+            className="bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 text-black"
           >
             <img
               src={course.imageURL}
