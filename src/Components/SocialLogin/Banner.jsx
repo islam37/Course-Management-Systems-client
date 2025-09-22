@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import Slider from "react-slick";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -8,32 +9,39 @@ const slides = [
   {
     title: "EduManagement",
     subtitle: "Streamline Your Course Management",
-    description: "Advanced tools for educators to manage courses, track progress, and enhance learning outcomes",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1471&q=80",
+    description:
+      "Advanced tools for educators to manage courses, track progress, and enhance learning outcomes",
+    image:
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1471&q=80",
     buttonText: "Explore Features",
-    color: "from-blue-900/80 to-blue-700/60"
+    color: "from-blue-900/80 to-blue-700/60",
   },
   {
     title: "Organize Courses Easily",
     subtitle: "Manage classes, schedules, and resources in one place",
-    description: "Intuitive dashboard to organize your educational content and streamline administrative tasks",
-    image: "https://images.unsplash.com/photo-1522881193457-37ae97c905bf?auto=format&fit=crop&w=1470&q=80",
+    description:
+      "Intuitive dashboard to organize your educational content and streamline administrative tasks",
+    image:
+      "https://images.unsplash.com/photo-1522881193457-37ae97c905bf?auto=format&fit=crop&w=1470&q=80",
     buttonText: "View Demo",
-    color: "from-purple-900/80 to-purple-700/60"
+    color: "from-purple-900/80 to-purple-700/60",
   },
   {
     title: "Enhanced Learning Experience",
     subtitle: "Tools for modern education",
-    description: "Create engaging learning environments with our comprehensive suite of educational tools",
-    image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1470&q=80",
+    description:
+      "Create engaging learning environments with our comprehensive suite of educational tools",
+    image:
+      "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1470&q=80",
     buttonText: "Learn More",
-    color: "from-teal-900/80 to-teal-700/60"
-  }
+    color: "from-teal-900/80 to-teal-700/60",
+  },
 ];
 
 const Banner = () => {
   const sliderRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate(); 
 
   const settings = {
     dots: true,
@@ -47,28 +55,32 @@ const Banner = () => {
     fade: true,
     cssEase: "cubic-bezier(0.645, 0.045, 0.355, 1)",
     beforeChange: (_, next) => setCurrentSlide(next),
-    appendDots: dots => (
+    appendDots: (dots) => (
       <div>
         <ul className="flex justify-center space-x-2 mt-6">{dots}</ul>
       </div>
     ),
-    customPaging: i => (
+    customPaging: (i) => (
       <div
         className={`w-2 h-2 rounded-full transition-all duration-300 ${
           i === currentSlide ? "bg-white scale-125" : "bg-white/50"
         }`}
       ></div>
-    )
+    ),
   };
 
   const textVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
   };
 
   const staggerContainer = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+    visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
   };
 
   return (
@@ -82,7 +94,9 @@ const Banner = () => {
               style={{ backgroundImage: `url(${slide.image})` }}
             >
               {/* Gradient Overlay */}
-              <div className={`absolute inset-0 bg-gradient-to-r ${slide.color}`} />
+              <div
+                className={`absolute inset-0 bg-gradient-to-r ${slide.color}`}
+              />
 
               {/* Floating animated shapes */}
               <motion.div
@@ -137,14 +151,19 @@ const Banner = () => {
                     className="flex flex-col sm:flex-row gap-3 justify-center"
                     variants={textVariants}
                   >
+                    {/* Primary Button -> /courses */}
                     <motion.button
+                      onClick={() => navigate("/courses")}
                       className="px-6 py-3 bg-white text-blue-900 hover:bg-blue-50 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                       whileHover={{ scale: 1.03, y: -2 }}
                       whileTap={{ scale: 0.98 }}
                     >
                       {slide.buttonText}
                     </motion.button>
+
+                    {/* Secondary Button -> /contact */}
                     <motion.button
+                      onClick={() => navigate("/contact")}
                       className="px-6 py-3 bg-transparent border border-white text-white hover:bg-white/10 rounded-lg font-semibold backdrop-blur-sm transition-all duration-300"
                       whileHover={{ scale: 1.03, y: -2 }}
                       whileTap={{ scale: 0.98 }}
@@ -168,8 +187,18 @@ const Banner = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          <svg
+            className="w-5 h-5 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
         </motion.button>
       </div>
@@ -181,8 +210,18 @@ const Banner = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
-          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <svg
+            className="w-5 h-5 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </motion.button>
       </div>
